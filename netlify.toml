@@ -1,0 +1,24 @@
+# https://dev.to/web2033/vite-dev-server-with-netlify-dev-support-1inh
+
+[[redirects]]
+force = true
+from = '/api/*'
+status = 200
+to = '/.netlify/functions/:splat'
+
+[[redirects]]
+from = '/*'
+status = 200
+to = '/index.html'
+
+[functions]
+directory = '.netlify/functions'
+
+[build]
+command = 'npm run generateInvitees && npm run build'
+environment = {NODE_VERSION = '14'}
+publish = 'dist'
+
+[dev]
+autoLaunch = false
+command = 'vite --host'

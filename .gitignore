@@ -1,0 +1,11 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+.netlify/functions-serve/*
+.netlify/data/*
+.netlify/.env
+.netlify/state.json
+.env
+invitees.json
