@@ -164,6 +164,8 @@ const handler: Handler = async (event, context) => {
 
     if (!query) {
         return errorResponse('Query must be provided')
+    } else if (query.length > 500) {
+        return errorResponse('Query is too long!')
     }
 
     const normalizedQuery = normalize(query)

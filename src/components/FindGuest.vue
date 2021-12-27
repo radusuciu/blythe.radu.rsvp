@@ -59,7 +59,7 @@ onMounted(() => {
                 First, let's find your invite, could we please have your name?
             </p>
             <div class="control is-medium" :class="{ 'is-loading': debouncedIsLoading }">
-                <input ref="searchInput" autofocus type="text"
+                <input ref="searchInput" autofocus type="text" maxlength="100"
                     class="input is-primary is-medium"
                     placeholder="Just start typing!"
                     v-model="searchTerm"
