@@ -4,7 +4,6 @@ dist
 dist-ssr
 *.local
 .netlify/functions-serve/*
-.netlify/data/*
 .netlify/.env
 .netlify/state.json
 .env
