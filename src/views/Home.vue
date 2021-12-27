@@ -14,8 +14,8 @@ const guestStore = useGuestStore()
 
 function onRightGuest(foundGuest: Guest) {
     responded.value = true
-    console.log(foundGuest)
     router.push({ name: 'response', params: { guestId: foundGuest.id }})
+    guestStore.guest = foundGuest
 }
 
 function onWrongGuest() {

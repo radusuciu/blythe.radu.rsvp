@@ -6,15 +6,12 @@ import { normalize } from '../utils/normalize.mjs'
 import * as fuzzball from 'fuzzball'
 
 
-// TODO: check if all of the matches have identical names
-// and if they do, we should handle that.. we need a disambiguation
-// field in the data to support this
-
 // TODO: do something when user says they are not the person
 
 const GOOD_SCORE_THRESHOLD = 85
 const PERFECT_SCORE = 100
-const NAME_MATCH_SCORE_THRESHOLD = 65
+const MINIMUM_SCORE_THRESHOLD = 65
+const NAME_MATCH_SCORE_THRESHOLD = 60
 const FUZZY_SCORER = fuzzball.partial_token_similarity_sort_ratio
 
 
@@ -87,7 +84,7 @@ function getTwoWordMatch(w1: string, w2: string): JSONGuest[] {
     })
 }
 
-function getFuzzyMatch(name: string, scoreThreshold: number) {
+function getFuzzyMatch(name: string, goodScoreThreshold: number) {
     const fuzzyMatches = fuzzball.extract(name, invitees, {
         scorer: FUZZY_SCORER,
         processor: choice => choice.fullName,
@@ -96,7 +93,7 @@ function getFuzzyMatch(name: string, scoreThreshold: number) {
         useCollator: true,
     })
 
-    let goodMatches = fuzzyMatches.filter(m => m.score >= scoreThreshold)
+    let goodMatches = fuzzyMatches.filter(m => m.score >= goodScoreThreshold)
 
     if (goodMatches.length > 1) {
         const perfectMatches = goodMatches.filter(m => m.score === PERFECT_SCORE)
@@ -138,11 +135,11 @@ function findGuest(name: string): [JSONGuest[], boolean] {
     } else if (guestsByName.length > 1 && words.length === 2) {
         return [guestsByName, !(words[0].length > 2 && words[1].length > 2)]
     } else {
-        const fuzzyMatches = getFuzzyMatch(name, 55)
+        const fuzzyMatches = getFuzzyMatch(name, MINIMUM_SCORE_THRESHOLD)
         const goodMatches = fuzzyMatches.filter(m => m.score >= GOOD_SCORE_THRESHOLD)
     
-        if (goodMatches.length) {
-            return [goodMatches.map(m => m.choice), false]
+        if (goodMatches.length && name.length > 2) {
+            return [goodMatches.map(m => m.choice || name.length < 3), false]
         } else if (fuzzyMatches.length) {
             return [[], true]
         } else {

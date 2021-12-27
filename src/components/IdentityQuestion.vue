@@ -12,8 +12,6 @@ defineProps({
 })
 
 defineEmits(['yes', 'no'])
-
-
 </script>
 
 <template>

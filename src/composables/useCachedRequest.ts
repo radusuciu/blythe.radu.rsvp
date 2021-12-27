@@ -25,28 +25,29 @@ export function useCachedRequest<T, U>(
             return Promise.resolve()
         }
 
-        isReady.value = false
-        isLoading.value = true
-
         if (cache.has(key)) {
-            console.log('cache has key')
             data.value = cache.get(key)!
             isReady.value = true
-        }
+            isLoading.value = false
+            error.value = undefined
+        } else {
+            isReady.value = false
+            isLoading.value = true
 
-        getter(key)
-            .then((newData) => {
-                cache.set(key, newData)
-                data.value = newData
-                error.value = undefined
-                isReady.value = true
-            })
-            .catch((err) => {
-                error.value = err
-            })
-            .finally(() => {
-                isLoading.value = false
-            })
+            getter(key)
+                .then((newData) => {
+                    cache.set(key, newData)
+                    data.value = newData
+                    error.value = undefined
+                    isReady.value = true
+                })
+                .catch((err) => {
+                    error.value = err
+                })
+                .finally(() => {
+                    isLoading.value = false
+                })
+        }
     })
 
     return { data, error, isLoading, isReady }

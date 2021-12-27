@@ -11,7 +11,7 @@ defineEmits(['rightGuest', 'wrongGuest'])
 
 const searchInput = ref<null | { focus: () => null }>(null)
 const searchTerm = ref('')
-const debouncedTerm = useDebounce(searchTerm, 200)
+const debouncedTerm = useDebounce(searchTerm, 300)
 
 const {
     data,
@@ -20,17 +20,22 @@ const {
     isReady,
 } = useCachedRequest(debouncedTerm, findGuest)
 
+const debouncedIsLoading = useDebounce(isLoading, 300)
 
-const exactMatch = computed(() => {
-    return error.value === undefined && data.value?.uniqueMatch
+const isExactMatch = computed(() => {
+    return error.value === undefined && data.value && data.value.guest && data.value.uniqueMatch
+})
+
+const isMultipleMatches = computed(() => {
+    return error.value === undefined && !data.value?.uniqueMatch && searchTerm.value.trim().length > 4 && data.value?.matches?.length
 })
 
 const keepTyping = computed(() => {
-    return error === undefined && !data.value?.uniqueMatch && searchTerm.value.trim().length > 2
+    return error.value === undefined && !data.value?.uniqueMatch && searchTerm.value.trim().length > 2
 })
 
 const noMatches = computed(() => {
-    return error && searchTerm.value.trim().length > 2
+    return error.value && !debouncedIsLoading.value && searchTerm.value.trim().length > 2
 })
 
 onMounted(() => {
@@ -53,7 +58,7 @@ onMounted(() => {
             <p class="">
                 First, let's find your invite, could we please have your name?
             </p>
-            <div class="control is-medium" :class="{ 'is-loading': isLoading }">
+            <div class="control is-medium" :class="{ 'is-loading': debouncedIsLoading }">
                 <input ref="searchInput" autofocus type="text"
                     class="input is-primary is-medium"
                     placeholder="Just start typing!"
@@ -61,22 +66,23 @@ onMounted(() => {
                 >
             </div>
             <transition name="fade">
-                <p v-show="isLoading" class="is-pulled-right has-text-right is-size-6 is-italic has-text-grey">
+                <p v-show="debouncedIsLoading" class="is-pulled-right has-text-right is-size-6 is-italic has-text-grey">
                     loading
                 </p>
             </transition>
         </div>
         <div class="block">
-            <div class="">
+            <div v-if="searchTerm.trim()">
                 <transition name="fade" mode="out-in">
                     <IdentityQuestion
-                        v-if="error === undefined && data && data.guest && data.uniqueMatch"
-                        :disabled="isLoading"
-                        :name="data.guest.name"
+                        v-if="isExactMatch"
+                        :disabled="debouncedIsLoading"
+                        :name="data?.guest?.name"
+                        :key="data!.guest!.id"
                         @yes="$emit('rightGuest', data?.guest)"
                         @no="$emit('wrongGuest')"
                     />
-                    <div class="notification is-info is-light" v-else-if="error === undefined && !data?.uniqueMatch && searchTerm.trim().length > 4 && data?.matches?.length">
+                    <div class="notification is-info is-light" v-else-if="isMultipleMatches">
                         There are multiple guests matching the name <strong>{{ searchTerm.trim() }}</strong>, please keep typing if you can, or select yourself below:
 
                         <div class="block field is-grouped mt-2">
@@ -93,10 +99,10 @@ onMounted(() => {
                             </span>
                         </div>
                     </div>
-                    <div class="notification is-info is-light" v-else-if="error === undefined && !data?.uniqueMatch && searchTerm.trim().length > 2">
+                    <div class="notification is-info is-light" v-else-if="keepTyping">
                         We could not find a good enough match for: <strong>{{ searchTerm.trim() }}</strong>, please keep typing.
                     </div>
-                    <div class="notification is-danger is-light" v-else-if="error && searchTerm.trim().length > 2">
+                    <div class="notification is-danger is-light" v-else-if="noMatches">
                         We couldn't find a guest matching the name <strong>{{ searchTerm.trim() }}</strong>. Please contact us at the following email and we'll figure it out: <a href="mailto:rsvp@blythe.radu.love">rsvp@blythe.radu.love</a>.
                     </div>
                 </transition>
@@ -109,12 +115,12 @@ onMounted(() => {
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
-  opacity: 0;
+    opacity: 0;
 }
 
 .button.is-multiline {
