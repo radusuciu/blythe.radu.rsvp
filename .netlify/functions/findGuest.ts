@@ -151,6 +151,16 @@ function findGuest(name: string): [JSONGuest[], boolean] {
     }
 }
 
+function guestFromJson(jsonGuest: JSONGuest): Guest {
+    return {
+        id: jsonGuest.id,
+        name: jsonGuest.name,
+        partyName: jsonGuest.partyName,
+        party: jsonGuest.party,
+        hasPlusOne: jsonGuest.hasPlusOne,
+    }
+}
+
 
 const handler: Handler = (event, context) => {
     const query: string = event.queryStringParameters?.query.trim()
@@ -168,7 +178,7 @@ const handler: Handler = (event, context) => {
     // this may be better to do on the client-side?
     if (matches.length === 1) {
         return response({
-            guest: matches[0],
+            guest: guestFromJson(matches[0]),
             uniqueMatch: true,
         })
     } else if (matches.length > 1 && keepTyping) {
@@ -181,7 +191,7 @@ const handler: Handler = (event, context) => {
 
     return response({
         uniqueMatch: false,
-        matches: matches,
+        matches: matches.map(m => guestFromJson(m)),
     })
 }
 
