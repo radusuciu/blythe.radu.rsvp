@@ -162,7 +162,7 @@ function guestFromJson(jsonGuest: JSONGuest): Guest {
 }
 
 
-const handler: Handler = (event, context) => {
+const handler: Handler = async (event, context) => {
     const query: string = event.queryStringParameters?.query.trim()
 
     if (!query) {
