@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useResponseStore } from '../stores/response'
-import { useRouter } from 'vue-router'
+import { LocationQueryRaw, useRouter } from 'vue-router'
 
 
 const props = defineProps({
@@ -14,8 +14,8 @@ const responseStore = useResponseStore()
 const router = useRouter()
 
 function onResponse() {
-    const query = {
-        coming: responseStore.isMainGuestComing,
+    const query: LocationQueryRaw = {
+        coming: responseStore.isMainGuestComing?.toString(),
         guestCount: responseStore.numGuestsComing,
     }
 

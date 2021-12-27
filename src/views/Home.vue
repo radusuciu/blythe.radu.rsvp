@@ -2,6 +2,7 @@
 
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { Guest } from '../api/guest'
 import FindGuest from '@/components/FindGuest.vue'
 import { useGuestStore } from '../stores/guest'
 
@@ -11,7 +12,7 @@ const guestStore = useGuestStore()
 
 // guestStore.clear()
 
-function onRightGuest(foundGuest) {
+function onRightGuest(foundGuest: Guest) {
     responded.value = true
     console.log(foundGuest)
     router.push({ name: 'response', params: { guestId: foundGuest.id }})

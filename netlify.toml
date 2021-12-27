@@ -16,7 +16,7 @@ directory = '.netlify/functions'
 
 [build]
 command = 'npm run generateInvitees && npm run build'
-environment = {NODE_VERSION = '14'}
+environment = {NODE_VERSION = '16'}
 publish = 'dist'
 
 [dev]

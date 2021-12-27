@@ -8,3 +8,5 @@ dist-ssr
 .netlify/state.json
 .env
 invitees.json
+.netlify/functions/*.zip
+.netlify/functions/manifest.json

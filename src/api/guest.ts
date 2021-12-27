@@ -1,5 +1,6 @@
 import { mande } from 'mande'
 
+
 const api = mande('/api')
 
 export interface Guest {
@@ -19,8 +20,17 @@ export interface GuestResponse {
     dietaryRestrictions?: string
 }
 
+export interface FindGuestAPIResponse {
+    uniqueMatch: boolean,
+    matches?: Guest[],
+    guest?: Guest,
+}
 
-export function getGuest(guestId: string) {
+export interface RecordResponseAPIResponse {
+
+}
+
+export function getGuest(guestId: string): Promise<any> {
     if (guestId) {
         return api.get('getGuest', { query: { guestId: guestId } })
     }
@@ -28,7 +38,7 @@ export function getGuest(guestId: string) {
     return Promise.resolve()
 }
 
-export function findGuest(query: string) {
+export function findGuest(query: string): Promise<FindGuestAPIResponse | void> {
     if (query) {
         return api.get('findGuest', { query : { query } })
     }
@@ -37,7 +47,7 @@ export function findGuest(query: string) {
 }
 
 
-export function recordResponse(guestResponses: GuestResponse[]) {
+export function recordResponse(guestResponses: GuestResponse[]): Promise<any> {
     if (guestResponses) {
         console.log(guestResponses)
         return api.post('recordResponse', guestResponses)

@@ -7,5 +7,5 @@ So I wasn't fully happy with most of the online RSVP solutions out there and I a
 API secrets can be modified on the Netlify website or using the CLI. To import from an .env file (which should not be checked in to version control!):
 
 ```bash
-netlify env:import .netlify/.env
+netlify env:import .env
 ```

@@ -18,7 +18,7 @@ const routes = [{
     path: '/thanks/:guestId',
     name: 'thanks',
     component: Thanks,
-    props: route => ({ ...route.query, ...route.params })
+    props: (route: any) => ({ ...route.query, ...route.params })
 }]
 
 const router = createRouter({

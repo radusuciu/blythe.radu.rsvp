@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, Ref } from 'vue'
 import { useCachedRequest } from '../composables/useCachedRequest'
-import { findGuest, Guest } from '../api/guest'
+import { findGuest, Guest, FindGuestAPIResponse } from '../api/guest'
 import IdentityQuestion from '@/components/IdentityQuestion.vue'
 import { useDebounce } from '@vueuse/core'
 
@@ -70,17 +70,17 @@ onMounted(() => {
             <div class="">
                 <transition name="fade" mode="out-in">
                     <IdentityQuestion
-                        v-if="error === undefined && data?.uniqueMatch"
+                        v-if="error === undefined && data && data.guest && data.uniqueMatch"
                         :disabled="isLoading"
                         :name="data.guest.name"
-                        @yes="$emit('rightGuest', data.guest)"
+                        @yes="$emit('rightGuest', data?.guest)"
                         @no="$emit('wrongGuest')"
                     />
-                    <div class="notification is-info is-light" v-else-if="error === undefined && !data?.uniqueMatch && searchTerm.trim().length > 4 && data.matches.length">
+                    <div class="notification is-info is-light" v-else-if="error === undefined && !data?.uniqueMatch && searchTerm.trim().length > 4 && data?.matches?.length">
                         There are multiple guests matching the name <strong>{{ searchTerm.trim() }}</strong>, please keep typing if you can, or select yourself below:
 
                         <div class="block field is-grouped mt-2">
-                            <span class="control" v-for="guest in data.matches" :key="guest.id">
+                            <span class="control" v-for="guest in data?.matches" :key="guest.id">
                                 <button @click="$emit('rightGuest', guest)" class="button is-multiline is-link is-outlined">
                                     <strong>{{ guest.name }}</strong>
                                     <div v-if="guest.party" v-for="partyGuest in guest.party" :key="partyGuest.id">
