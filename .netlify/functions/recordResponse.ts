@@ -7,7 +7,7 @@ const handler: Handler = async (event, context) => {
     const responsesRaw = JSON.parse(event.body)
     const date = new Date()
     const responses = responsesRaw.map(r => {
-        r.date = date.toUTCString()
+        r.date = date.toISOString()
         return r
     })
 
