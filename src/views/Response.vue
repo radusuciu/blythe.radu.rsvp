@@ -30,7 +30,7 @@ guestId.value = props.guestId
 const responseComponent = computed(() => {
     if (guest.value.hasPlusOne) {
         return PlusOneResponse
-    } else if (guest.value.hasOwnProperty('party')) {
+    } else if (guest.value.hasOwnProperty('party') && guest.value.party.length) {
         return PartyResponse
     }
 
