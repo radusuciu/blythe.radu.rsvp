@@ -123,9 +123,7 @@ onMounted(() => {
 .is-grouped {
     flex-wrap: wrap;
     gap: 0.5em 0;
-    justify-content: center;
 }
-
 
 .fade-enter-active,
 .fade-leave-active {
