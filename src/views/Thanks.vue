@@ -62,6 +62,11 @@ function website() {
 </template>
 
 <style scoped>
+.is-grouped {
+    flex-wrap: wrap;
+    gap: 0.5em 0;
+}
+
 /* TODO: these aren't being applied.. */
 #app {
     height: 100%;
