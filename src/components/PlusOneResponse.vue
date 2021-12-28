@@ -74,7 +74,7 @@ function updatePlusOneName() {
                 <div v-if="guestHasPlusOne && (responseSelected && responseStore.isMainGuestComing)" class="columns is-vcentered">
                     <span class="column mr-4">What is the name of your plus one?</span>
                     <span class="column">
-                        <input ref="plusOneNameInput" v-model="plusOneName" class="input" type="text" required>
+                        <input ref="plusOneNameInput" v-model="plusOneName" class="input" type="text" autocomplete="off" autocorrect="off" required>
                     </span>
                 </div>
             </transition>
