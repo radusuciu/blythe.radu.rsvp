@@ -120,6 +120,13 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.is-grouped {
+    flex-wrap: wrap;
+    gap: 0.5em 0;
+    justify-content: center;
+}
+
+
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 0.3s ease;
