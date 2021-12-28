@@ -28,10 +28,6 @@ function rsvp() {
     router.push({ name: 'home' })
 }
 
-function website() {
-    router.push('https://blythe.radu.love')
-}
-
 </script>
 
 <template>
@@ -52,7 +48,7 @@ function website() {
         </template>
         <div class="field is-grouped is-justify-content-center mt-5">
             <p class="control">
-                <button @click="website()" class="is-large is-primary button">Go to the main site</button>
+                <a href="https://blythe.radu.love" class="is-large is-primary button">Go to the main site</a>
             </p>
             <p class="control">
                 <button @click="rsvp" class="is-large is-secondary button">RSVP again</button>
