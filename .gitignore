@@ -10,3 +10,4 @@ dist-ssr
 invitees.json
 .netlify/functions/*.zip
 .netlify/functions/manifest.json
+public/*
