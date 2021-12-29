@@ -10,17 +10,14 @@
   },
   "dependencies": {
     "@netlify/functions": "^0.10.0",
-    "@plasticity/coldbrew": "^0.0.74",
     "@vueuse/core": "^7.3.0",
     "bulma": "^0.9.3",
-    "bulmaswatch": "^0.8.1",
     "fuzzball": "github:nol13/fuzzball.js#esm",
     "google-spreadsheet": "^3.2.0",
     "lodash": "^4.17.21",
     "mande": "^1.0.0",
     "party-js": "^2.1.2",
     "pinia": "^2.0.6",
-    "pyodide": "^0.18.2",
     "vue": "^3.2.16",
     "vue-router": "^4.0.12"
   },
