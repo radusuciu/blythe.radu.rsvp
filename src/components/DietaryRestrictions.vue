@@ -33,8 +33,6 @@ const responseStore = useResponseStore()
 
 function onYes() {
     showTextbox.value = true
-    console.log(restrictionsInput.value)
-    nextTick(() => console.log(restrictionsInput.value))
     nextTick(() => {
         // I don't fully understand the need for setTimeout here, but
         // without it, the ref is undefined.. maybe has something to do with

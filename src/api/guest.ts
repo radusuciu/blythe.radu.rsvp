@@ -49,7 +49,6 @@ export function findGuest(query: string): Promise<FindGuestAPIResponse | void> {
 
 export function recordResponse(guestResponses: GuestResponse[]): Promise<any> {
     if (guestResponses) {
-        console.log(guestResponses)
         return api.post('recordResponse', guestResponses)
     }
 

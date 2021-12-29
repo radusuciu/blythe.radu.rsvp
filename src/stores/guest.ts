@@ -11,16 +11,12 @@ export const useGuestStore = defineStore('guest', () => {
     const guestId = ref<string>('')
 
     watch(guestId, (guestId, previousGuestId) => {
-        console.log('guestId changed', guestId)
-        console.log(guestId, previousGuestId)
         // only fetch new guest if this at initialization
         // since that is already handled
         if (guestId) {
             fetchGuest(guestId)
         }
     })
-    // TODO re-consider use of cached request here
-    console.log('set up store', guestId.value)
 
     const {
         data: guest,
@@ -30,13 +26,11 @@ export const useGuestStore = defineStore('guest', () => {
     } = useCachedRequest(guestId, getGuest)
 
     function fetchGuest(guestId: string) {
-        console.log('getting guest')
         error.value = undefined
         isLoading.value = true
 
         return getGuest(guestId)
             .then((guestData) => {
-                console.log('success', guestData)
                 guest.value = guestData
             })
             .catch((err) => {
