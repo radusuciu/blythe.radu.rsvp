@@ -20,12 +20,12 @@ const nameSlug = computed(() => {
 
 <template>
     <tr>
-        <td>
+        <td class="is-vcentered">
             <span :class="{'has-text-success': coming === true, 'has-text-grey': coming === false }">
                 {{ name }}
             </span>
         </td>
-        <td>
+        <td class="is-vcentered">
             <div class="control is-size-5">
                 <label class="radio">
                     <input @click="$emit('yes', $event)" :name="nameSlug" type="radio" :value="true" v-model="coming">
@@ -33,7 +33,7 @@ const nameSlug = computed(() => {
                 </label>
             </div>
         </td>
-        <td>
+        <td class="is-vcentered">
             <div class="control is-size-5">
                 <label class="radio">
                     <input @click="$emit('no')" :name="nameSlug" type="radio" :value="false" v-model="coming">
