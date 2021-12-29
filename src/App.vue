@@ -15,24 +15,24 @@ import '../node_modules/bulma/css/bulma.css'
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.1s linear;
+    transition: opacity 0.1s linear;
 }
 
 .fade-enter-from,
 .fade-leave-to {
-  opacity: 0;
+    opacity: 0;
 }
 
 .slide-fade-enter-active {
-  transition: all .3s ease-in;
+    transition: all .3s ease-in;
 }
 .slide-fade-leave-active {
-  transition: all .2s ease-out;
+    transition: all .2s ease-out;
 }
 .slide-fade-enter, .slide-fade-leave-to
 /* .slide-fade-leave-active below version 2.1.8 */ {
-  transform: translateX(10px);
-  opacity: 0;
+    transform: translateX(10px);
+    opacity: 0;
 }
 
 </style>

@@ -82,6 +82,7 @@ function updatePlusOneName() {
                 <hr>
                 <DietaryRestrictions
                     :prompt-text="dietaryRestrictionsText"
+                    answer-buttons-class="is-inline-flex"
                     css-class="has-text-centered is-italic"
                 />
             </template>
@@ -95,9 +96,7 @@ function updatePlusOneName() {
     </div>
 </template>
 
-
 <style scoped>
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.1s linear;

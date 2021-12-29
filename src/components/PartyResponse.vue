@@ -44,6 +44,7 @@ const party = computed(() => {
             </table>
             <DietaryRestrictions
                 css-class="has-text-centered is-italic"
+                answer-buttons-class="is-inline-flex"
             />
         </div>
 
