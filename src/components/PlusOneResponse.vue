@@ -57,7 +57,7 @@ function updatePlusOneName() {
                 class="columns"
                 question="Are you able to make it?"
                 question-class="column"
-                answer-buttons-class="column"
+                answer-buttons-class="column is-inline"
                 @yes="guestIsComing(guest.id, $event)"
                 @no="guestIsNotComing(guest.id); guestHasPlusOne = false"
             />
@@ -66,7 +66,7 @@ function updatePlusOneName() {
                 class="columns"
                 question="Will you be bringing a plus one?"
                 question-class="column"
-                answer-buttons-class="column"
+                answer-buttons-class="column is-inline"
                 @yes="onGuestHasPlusOne($event)"
                 @no="onGuestDoesNotHavePlusOne"
             />

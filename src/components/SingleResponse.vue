@@ -29,7 +29,7 @@ const {
                 class="columns"
                 question="Are you able to make it?"
                 question-class="column"
-                answer-buttons-class="column"
+                answer-buttons-class="is-inline column"
                 @yes="guestIsComing(guest.id, $event)"
                 @no="guestIsNotComing(guest.id)"
             />
@@ -37,7 +37,7 @@ const {
                 v-if="responseSelected && responseStore.isMainGuestComing"
                 css-class="columns"
                 question-text-class="column"
-                answer-buttons-class="column"
+                answer-buttons-class="is-inline column"
             />
         </div>
 

@@ -46,7 +46,7 @@ function no() {
         <span class="mr-4" :class="questionClass" style="vertical-align: middle">
             {{ question }}
         </span>
-        <span class="buttons is-inline" :class="answerButtonsClass">
+        <span class="buttons" :class="answerButtonsClass">
             <button @click="yes($event)" :class="answeredYes ? 'is-active': 'is-outlined'" class="button is-success">Yes</button>
             <button @click="no" :class="answeredNo ? 'is-active': 'is-outlined'" class="button is-danger">No</button>
         </span>
