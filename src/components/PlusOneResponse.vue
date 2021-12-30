@@ -52,7 +52,7 @@ function updatePlusOneName() {
     <div>
         <ResponseHeader :guest-name="guest.name" />
 
-        <div class="box">
+        <div class="box" :class="{ 'is-loading': responseStore.isLoading }">
             <Question
                 class="columns"
                 question="Are you able to make it?"
