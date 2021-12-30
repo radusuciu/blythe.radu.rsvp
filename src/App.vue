@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import '../node_modules/bulma/css/bulma.css'
+import './assets/main.scss'
 </script>
 
 <template>

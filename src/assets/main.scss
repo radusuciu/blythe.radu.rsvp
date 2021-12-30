@@ -1,0 +1,30 @@
+@import "bulma/sass/base/_all.sass";
+@import "bulma/sass/grid/columns.sass";
+@import "bulma/sass/elements/button.sass";
+@import "bulma/sass/elements/container.sass";
+@import "bulma/sass/elements/table.sass";
+@import "bulma/sass/elements/title.sass";
+@import "bulma/sass/elements/notification.sass";
+@import "bulma/sass/elements/box.sass";
+@import "bulma/sass/elements/other.sass";
+@import "bulma/sass/layout/section.sass";
+@import "bulma/sass/form/_all.sass";
+@import "bulma/sass/helpers/_all.sass";
+@import "bulma/sass/utilities/_all.sass";
+
+div {
+    &.is-loading {
+        position: relative;
+        pointer-events: none;
+        opacity: 0.5;
+        &:after {
+            @include loader;
+            position: absolute;
+            top: calc(50% - 2.5em);
+            left: calc(50% - 2.5em);
+            width: 5em;
+            height: 5em;
+            border-width: 0.25em;
+        }
+    }
+}
