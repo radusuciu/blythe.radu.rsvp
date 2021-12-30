@@ -13,10 +13,6 @@ const props = defineProps({
     guestCount: {
         type: [Number, String],
         required: true,
-    },
-    totalGuests: {
-        type: [Number, String],
-        required: true,
     }
 })
 
